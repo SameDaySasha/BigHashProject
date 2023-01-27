@@ -13,9 +13,9 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
    this.capacity = numBuckets
    this.data = new Array(this.capacity).fill(null);
    this.cache = {}
-   
+
   }
- 
+
   hash(key) {
     let hashValue = 0;
 
@@ -33,30 +33,30 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   insert(key, value) {
-    
+
     let hashModKey = this.hashMod(key)
     let newNode = new KeyValuePair(key, value)
     let currentNode = this.data[hashModKey]
    if(this.data[hashModKey] === null){
     this.data[hashModKey] = newNode
     this.count++;
-   } else {
+   } else { //we can get rid of this whole if statement.
      while(currentNode){
       if(currentNode.key === key){
-        this.cache[key] = value
+        // this.cache[key] = value
         currentNode.value = value
-        
+
         return currentNode
       }
       currentNode = currentNode.next
-     } 
+     }
      newNode.next = this.data[hashModKey]
      this.data[hashModKey] = newNode
      this.count++
    }
-    
-   
-    
+
+
+
   }
 
   read(key) {
