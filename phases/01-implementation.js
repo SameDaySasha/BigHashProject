@@ -33,6 +33,10 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   insert(key, value) {
+    if (this.count / this.capacity >= 0.7) {
+      this.resize();
+    }
+
 
     let hashModKey = this.hashMod(key)
     let newNode = new KeyValuePair(key, value)
