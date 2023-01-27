@@ -98,13 +98,26 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
     }
 
-
-
   }
 
 
   delete(key) {
-    // Your code here
+    let hashModKey = this.hashMod(key);
+    let currentNode = this.data[hashModKey];
+
+    if (currentNode && currentNode.key === key) {
+      this.data[hashModKey] = this.data[hashModKey].next
+      this.count--;
+      return;
+    }
+    while (currentNode) {
+      if (currentNode.next && currentNode.next.key === key) {
+        currentNode.next = currentNode.next.next;
+        this.count--;
+      }
+      currentNode = currentNode.next;
+    }
+    return `Key not found`;
   }
 }
 
