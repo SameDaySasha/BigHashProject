@@ -72,7 +72,30 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
 
   resize() {
-    // Your code here
+    //change the capacity
+    this.count = 0;
+    this.capacity *= 2;
+    //store our values
+    let oldData = this.data.slice();
+    //new instance of data
+    this.data = new Array(this.capacity).fill(null);
+    //add values into new data
+    //iterate over buckets
+    for (let i = 0; i < oldData.length; i++){
+      //if a bucket has something...
+      let position = oldData[i];
+      //traverse over linked list
+      while (position) {
+        //insert nodes in new Data
+        this.insert(position.key, position.value);
+        position = position.next;
+
+      }
+
+    }
+
+
+
   }
 
 
